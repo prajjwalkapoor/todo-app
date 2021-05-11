@@ -35,7 +35,7 @@ export default function Navbar() {
       <div className="nav-btns">
         {isSignedIn ? (
           <>
-            <Link className="navLink">
+            <Link className="navLink" to="/">
               <a className="btn-sec" onClick={() => firebase.auth().signOut()}>
                 Logout
               </a>

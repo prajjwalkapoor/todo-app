@@ -141,14 +141,14 @@ h4 {
   background-color: var(--main-color);
   margin: 0;
   padding: 2rem 0;
-  height: 100vh;
+  height: 90vh;
 }
 .landing-container {
   text-align: left;
   background-color: var(--white-color);
   margin-top: 2.5rem;
   width: 90vw;
-  height: 75vh;
+  height: 78%;
   border-radius: 25px;
   position: absolute;
   left: 50%;
@@ -157,12 +157,12 @@ h4 {
   box-shadow: -2px 6px 34px 0px rgba(102, 102, 102, 0.75);
 }
 .primary-landing-h1 {
-  font-size: 8rem;
+  font-size: 12rem;
   font-weight: 500;
   margin: 5rem 0 0 2rem;
 }
 .secondary-landing-h1 {
-  font-size: 4.5rem;
+  font-size: 6.5rem;
   font-weight: 500;
   margin: 0.5rem 0 0 2.5rem;
   color: var(--white-color);
@@ -182,9 +182,9 @@ h4 {
   height: 40vh;
 }
 /* todos */
-/* .todo {
-  margin-top: 2rem;
-} */
+.todo {
+  margin-bottom: 2rem;
+}
 .todo input {
   margin-top: 0.3rem;
   width: 70%;
@@ -201,12 +201,10 @@ h4 {
 }
 .todo-list {
   background-color: var(--white-color);
-  position: absolute;
-  left: 50%;
-  top: 65%;
-  transform: translate(-50%, -50%);
-  width: 72%;
-  height: 40%;
+  margin: 2rem auto;
+  padding-bottom: 1rem;
+  width: 71.5%;
   border: 1px solid #4f4f4f;
   border-radius: 15px;
+  height: 100vh;
 }
