@@ -208,3 +208,6 @@ h4 {
   border-radius: 15px;
   height: 100vh;
 }
+.null {
+  background-color: black;
+}

@@ -25,11 +25,11 @@ export default function Books() {
     db.collection("todos")
       .doc(user.uid)
       .set({
-        todos: [...myTodos, { todo: todoText, id: uuid(), isprogress: true }],
+        todos: [...myTodos, todoText],
       });
     setTodoText("");
   };
-  // console.log(myTodos);
+  console.log(myTodos);
   // if user not signed in
   if (!user) {
     return <h1>Please Sign in to Continue</h1>;

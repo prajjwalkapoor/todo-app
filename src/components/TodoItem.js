@@ -6,13 +6,14 @@ export default function TodoItem({ todos, user }) {
     // db.collection("todos").doc(id).update({
   }
 
-  function deleteTodo(selectedTodo) {
-    // const docRef = db.collection("todos").doc(user.uid);
-    // docRef.get().then((docsnap) => {
-    //   const result = docsnap
-    //     .data()
-    //     .todos.filter((todo) => (todo.id = selectedTodo.id));
-    // });
+  function deleteTodo(deletetodo) {
+    var docRef = db.collection("todos").doc(user.uid);
+    docRef.get().then((docsnap) => {
+      var result = docsnap.data().todos.filter((todo) => todo !== deletetodo);
+      docRef.update({
+        todos: result,
+      });
+    });
   }
   return (
     <div>
@@ -20,12 +21,12 @@ export default function TodoItem({ todos, user }) {
         <Container style={{ width: "100%", marginTop: "2.5rem" }}>
           <ListItem>
             <ListItemText
-              primary={todos.todo}
-              secondary={todos.isprogress ? "In Progress" : "Tast Completed"}
+              primary={todos}
+              //   secondary={todos.isprogress ? "In Progress" : "Tast Completed"}
             />
-            <Button onClick={toggleIsProgress}>
+            {/* <Button onClick={toggleIsProgress}>
               {todos.isprogress ? "Done" : "Undone"}
-            </Button>
+            </Button> */}
             <Button onClick={deleteTodo}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
