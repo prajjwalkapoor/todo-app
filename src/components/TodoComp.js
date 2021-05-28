@@ -19,7 +19,8 @@ export default function Books() {
           }
         });
     }
-  }, []);
+  }, [user]);
+
   const addTodo = (e) => {
     e.preventDefault();
     db.collection("todos")
@@ -50,9 +51,11 @@ export default function Books() {
             ></input>
           </form>
           <div className="todo-list">
-            {myTodos.map((todos) => {
-              return <TodoItem todos={todos} user={user}></TodoItem>;
-            })}
+            {myTodos.length !== 0
+              ? myTodos.map((todos) => {
+                  return <TodoItem todos={todos} user={user}></TodoItem>;
+                })
+              : "add todos here"}
           </div>
         </div>
       </div>

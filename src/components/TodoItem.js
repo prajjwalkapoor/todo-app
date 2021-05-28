@@ -2,14 +2,14 @@ import React from "react";
 import { db } from "./firebase";
 import { Button, Container, ListItem, ListItemText } from "@material-ui/core";
 export default function TodoItem({ todos, user }) {
-  function toggleIsProgress() {
-    // db.collection("todos").doc(id).update({
-  }
+  // function toggleIsProgress() {
+  //   // db.collection("todos").doc(id).update({
+  // }
 
-  function deleteTodo(deletetodo) {
+  function deleteTodo() {
     var docRef = db.collection("todos").doc(user.uid);
     docRef.get().then((docsnap) => {
-      var result = docsnap.data().todos.filter((todo) => todo !== deletetodo);
+      var result = docsnap.data().todos.filter((todo) => todo !== todos);
       docRef.update({
         todos: result,
       });
