@@ -2,31 +2,44 @@ import React from "react";
 import { db } from "./firebase";
 import { Button, Container, ListItem, ListItemText } from "@material-ui/core";
 export default function TodoItem({ todos, user }) {
-  // function toggleIsProgress() {
-  //   // db.collection("todos").doc(id).update({
-  // }
+  var docRef = db.collection("todos").doc(user.uid);
 
   function deleteTodo() {
-    var docRef = db.collection("todos").doc(user.uid);
     docRef.get().then((docsnap) => {
-      var result = docsnap.data().todos.filter((todo) => todo !== todos);
+      var result = docsnap.data().todos.filter((todo) => todo.id !== todos.id);
+      // console.log(result);
       docRef.update({
         todos: result,
       });
     });
   }
+  const toggleIsProgress = (toggleId) => {
+    docRef.get().then((docsnap) => {
+      var result = docsnap
+        .data()
+        .todos.map((obj) =>
+          obj.id === toggleId
+            ? { ...obj, isprogress: obj.isprogress ? false : true }
+            : obj
+        );
+      docRef.update({
+        todos: result,
+      });
+    });
+  };
+
   return (
     <div>
       <>
         <Container style={{ width: "100%", marginTop: "2.5rem" }}>
           <ListItem>
             <ListItemText
-              primary={todos}
-              //   secondary={todos.isprogress ? "In Progress" : "Tast Completed"}
+              primary={todos.text}
+              secondary={todos.isprogress ? "In Progress" : "Tast Completed"}
             />
-            {/* <Button onClick={toggleIsProgress}>
+            <Button onClick={() => toggleIsProgress(todos.id)}>
               {todos.isprogress ? "Done" : "Undone"}
-            </Button> */}
+            </Button>
             <Button onClick={deleteTodo}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
