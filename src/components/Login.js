@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import firebase from "firebase";
 
@@ -58,9 +59,14 @@ function SignInScreen() {
               Welcome {firebase.auth().currentUser.displayName}! You are now
               signed-in!
             </p>
-            <a className="btn" onClick={() => firebase.auth().signOut()}>
+            <Link to="/mytodos">
+              <button className="btn" style={{ marginRight: "0.7rem" }}>
+                My todos
+              </button>
+            </Link>
+            <button className="btn" onClick={() => firebase.auth().signOut()}>
               Sign-out
-            </a>
+            </button>
           </div>
         </div>
       </>

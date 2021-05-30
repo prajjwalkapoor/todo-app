@@ -23,6 +23,7 @@ h6 {
 .navBar {
   display: flex;
   justify-content: space-around;
+  flex-wrap: wrap;
   background-color: var(--main-color);
   padding: 1.8rem 0;
 }
@@ -37,6 +38,7 @@ h6 {
 .navBar .navLink:hover {
   color: var(--main-color);
 }
+
 .links {
   display: flex;
   justify-content: space-around;
@@ -141,14 +143,14 @@ h4 {
   background-color: var(--main-color);
   margin: 0;
   padding: 2rem 0;
-  height: 90vh;
+  height: 80vh;
 }
 .landing-container {
   text-align: left;
   background-color: var(--white-color);
   margin-top: 2.5rem;
   width: 90vw;
-  height: 78%;
+  height: 82%;
   border-radius: 25px;
   position: absolute;
   left: 50%;
@@ -157,12 +159,12 @@ h4 {
   box-shadow: -2px 6px 34px 0px rgba(102, 102, 102, 0.75);
 }
 .primary-landing-h1 {
-  font-size: 12rem;
+  font-size: clamp(5rem, 13vw, 12rem);
   font-weight: 500;
   margin: 5rem 0 0 2rem;
 }
 .secondary-landing-h1 {
-  font-size: 6.5rem;
+  font-size: clamp(4rem, 7vw, 5rem);
   font-weight: 500;
   margin: 0.5rem 0 0 2.5rem;
   color: var(--white-color);
@@ -201,13 +203,25 @@ h4 {
 }
 .todo-list {
   background-color: var(--white-color);
-  margin: 2rem auto;
+  margin: 1.5rem auto;
   padding-bottom: 1rem;
   width: 71.5%;
   border: 1px solid #4f4f4f;
   border-radius: 15px;
-  height: 100vh;
+  height: 50vh;
+  overflow-y: scroll;
 }
+
+.todo-list::-webkit-scrollbar {
+  width: 4px;
+}
+.todo-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+.todo-list::-webkit-scrollbar-thumb {
+  background-color: #005cc8;
+}
+
 .null {
   background-color: black;
 }
