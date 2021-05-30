@@ -6,6 +6,8 @@ import NotFound from "./components/NotFound";
 import Login from "./components/Login";
 import Logout from "./components/Logout";
 import Todos from "./components/TodoComp";
+import About from "./components/About";
+import Contact from "./components/Contact";
 
 function App() {
   return (
@@ -17,6 +19,8 @@ function App() {
           <Route path="/auth/login" component={Login}></Route>
           <Route path="/auth/logout" component={Logout}></Route>
           <Route path="/mytodos" component={Todos}></Route>
+          <Route path="/about" component={About}></Route>
+          <Route path="/contact" component={Contact}></Route>
           <Route component={NotFound}></Route>
         </Switch>
       </div>

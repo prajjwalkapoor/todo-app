@@ -25,10 +25,10 @@ export default function Navbar() {
         <Link className="navLink" to="/">
           <li>Home</li>
         </Link>
-        <Link className="navLink" to="/books">
+        <Link className="navLink" to="/about">
           <li>About</li>
         </Link>
-        <Link className="navLink" to="/books">
+        <Link className="navLink" to="/contact">
           <li>Contact Me</li>
         </Link>
       </div>
