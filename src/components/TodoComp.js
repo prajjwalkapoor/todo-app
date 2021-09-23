@@ -8,9 +8,11 @@ export default function Books() {
 
   const [todoText, setTodoText] = useState("");
   const [myTodos, setMyTodos] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (user) {
+      setLoading(true);
       db.collection("todos")
         .doc(user.uid)
         .onSnapshot((docsnap) => {
@@ -18,6 +20,7 @@ export default function Books() {
             setMyTodos(docsnap.data().todos);
           }
         });
+      setLoading(false);
     }
   }, [user]);
 
@@ -51,11 +54,15 @@ export default function Books() {
             ></input>
           </form>
           <div className="todo-list">
-            {myTodos.length !== 0
-              ? myTodos.map((todos) => {
-                  return <TodoItem todos={todos} user={user}></TodoItem>;
-                })
-              : "add todos here"}
+            {loading ? (
+              <h3>Loading.....</h3>
+            ) : myTodos.length !== 0 ? (
+              myTodos.map((todos) => {
+                return <TodoItem todos={todos} user={user}></TodoItem>;
+              })
+            ) : (
+              "add todos here"
+            )}
           </div>
         </div>
       </div>
