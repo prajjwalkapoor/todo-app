@@ -3,13 +3,15 @@ import uuid from "react-uuid";
 import firebase from "firebase";
 import { db } from "./firebase";
 import TodoItem from "./TodoItem";
+import ColorPicker from "./ColorPicker";
 export default function Books() {
   var user = firebase.auth().currentUser;
 
   const [todoText, setTodoText] = useState("");
+  const [todo, setTodo] = useState({});
   const [myTodos, setMyTodos] = useState([]);
   const [loading, setLoading] = useState(false);
-
+  const [isPickerVisible, setisPickerVisible] = useState(false);
   useEffect(() => {
     if (user) {
       setLoading(true);
@@ -25,11 +27,10 @@ export default function Books() {
   }, [user]);
 
   const addTodo = (e) => {
-    e.preventDefault();
     db.collection("todos")
       .doc(user.uid)
       .set({
-        todos: [{ text: todoText, id: uuid(), isprogress: true }, ...myTodos],
+        todos: [todo, ...myTodos],
       });
     setTodoText("");
   };
@@ -39,33 +40,52 @@ export default function Books() {
     return <h1>Please Sign in to Continue</h1>;
   } else {
     return (
-      <div className="half-background">
-        &nbsp;
-        <div className="todo">
-          <form onSubmit={addTodo}>
-            <h1>Todos</h1>
-            <input
-              type="text"
-              placeholder="Write your todo and press enter"
-              value={todoText}
-              onChange={(e) => {
-                setTodoText(e.target.value);
+      <>
+        <ColorPicker
+          isPickerVisible={isPickerVisible}
+          addTodo={addTodo}
+          todo={todo}
+          setTodo={setTodo}
+          setisPickerVisible={setisPickerVisible}
+        />
+        <div className="half-background">
+          &nbsp;
+          <div className="todo">
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                setTodo({
+                  text: todoText,
+                  id: uuid(),
+                  isprogress: true,
+                });
+                setisPickerVisible(true);
               }}
-            ></input>
-          </form>
-          <div className="todo-list">
-            {loading ? (
-              <h3>Loading.....</h3>
-            ) : myTodos.length !== 0 ? (
-              myTodos.map((todos) => {
-                return <TodoItem todos={todos} user={user}></TodoItem>;
-              })
-            ) : (
-              "add todos here"
-            )}
+            >
+              <h1>Todos</h1>
+              <input
+                type="text"
+                placeholder="Write your todo and press enter"
+                value={todoText}
+                onChange={(e) => {
+                  setTodoText(e.target.value);
+                }}
+              ></input>
+            </form>
+            <div className="todo-list">
+              {loading ? (
+                <h3>Loading.....</h3>
+              ) : myTodos.length !== 0 ? (
+                myTodos.map((todos) => {
+                  return <TodoItem id={todos.id} todos={todos} user={user}></TodoItem>;
+                })
+              ) : (
+                "add todos here"
+              )}
+            </div>
           </div>
         </div>
-      </div>
+      </>
     );
   }
 }
